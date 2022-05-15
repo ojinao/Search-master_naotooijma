@@ -25,5 +25,13 @@ Route::post('/login', 'Auth\Login\LoginController@login');
 Route::get('/register', 'Auth\Register\RegisterController@register')->name('register');
 Route::post('/register', 'Auth\Register\RegisterController@register');
 
-Route::get('/added', 'Auth\Register\RegisterController@added');
-Route::post('/added', 'Auth\Register\RegisterController@added');
+Route::get('/confirmation', 'Auth\Register\RegisterController@confirmation')->name('confirmation');
+Route::post('/confirmation', 'Auth\Register\RegisterController@confirmation');
+
+Route::get('/storage', 'Auth\Register\RegisterController@storage');
+Route::post('/storage', 'Auth\Register\RegisterController@storage');
+
+
+
+Route::get('/add', 'Auth\Register\RegisterController@added')->name('add');
+Route::post('/add', 'Auth\Register\RegisterController@added');

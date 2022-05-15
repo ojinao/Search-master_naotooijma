@@ -1,77 +1,111 @@
-@extends('layouts.app')
+@extends('layouts.logout')
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+    <div class = "title">ユーザー登録</div>
+    {!! Form::open(['url' => '/confirmation']) !!}
+    {{Form::token()}}
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
+     @if($errors->any())
+        @foreach($errors->all() as $error)
+        {{ $error}}<br/>
+        @endforeach
+     @endif
 
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+    <div class = "main">
+        <div class="form-group">
+            <p>{{ Form::label('username','ユーザー名(姓、名)') }}</p>
+            {!! Form::input('text', 'LastName', null, ['class' => 'form']) !!}
+            <!-- 上と下のファサードは書き方が違うだけで同じ -->
+            {{ Form::text('FirstName',null,['class' => 'form
+right']) }}
         </div>
+
+        <div class="form-group">
+            <p>{{ Form::label('username_kana','ユーザー名(セイ、メイ)') }}</p>
+            {!! Form::input('text', 'LastName_kana', null, ['class' => 'form']) !!}
+            {{ Form::text('FirstName_kana',null,['class' => 'form
+right']) }}
+        </div>
+
+        <div class="form-group">
+            <p>{{ Form::label('birthday','誕生日（年、月、日）') }}</p>
+            {!! Form::input('text', 'birthday_year', null, ['class' => 's-form']) !!}
+            {{ Form::text('birthday_month',null,['class' => 's-form']) }}
+            {{ Form::text('birthday_day',null,['class' => 's-form']) }}
+        </div>
+
+        <div class="form-group">
+            <p>{{ Form::label('admission_date','入学日（年、月、日') }}</p>
+            {!! Form::input('text', 'admission_year', null, ['class' => 's-form']) !!}
+            {{ Form::text('admission_month',null,['class' => 's-form']) }}
+            {{ Form::text('admission_day',null,['class' => 's-form']) }}
+        </div>
+
+        <div class="form-group radio">
+            {{ Form::label('man','男性') }}
+            {!! Form::radio('gender', 0, false, ['class' => 'radioBtn']) !!}
+            {{ Form::label('woman','女性') }}
+            {{ Form::radio('gender', 1, false,['class' => 'radioBtn']) }}
+        </div>
+
+        <div class="form-group">
+            <p>{{ Form::label('email','メールアドレス') }}</p>
+            {{ Form::email('email',null,['class' => 'form big']) }}
+        </div>
+
+        <div class="form-group">
+            <p>{{ Form::label('password','パスワード') }}</p>
+            {{ Form::password('password',['class' => 'form big']) }}
+        </div>
+
+        <div class="form-group">
+            <p>{{ Form::label('password','パスワード確認') }}</p>
+            {{ Form::password('password_confirmation',['class' => 'form big']) }}
+        </div>
+
+        <div class="form-group radio">
+            {{ Form::label('kokugo','国語講師') }}
+            {!! Form::radio('role', 0, false, ['class' => 'radioBtn']) !!}
+            {{ Form::label('math','数学講師') }}
+            {{ Form::radio('role', 5, false,['class' => 'radioBtn']) }}
+            {{ Form::label('student','生徒') }}
+            {{ Form::radio('role', 10, false,['class' => 'radioBtn']) }}
+
+        </div>
+
+        <div class="form-group radio">
+            <p>{{ Form::label('kokugo_t','国語講師担当者') }}</p>
+            @foreach($kokugo as $kokugo)
+            {{ Form::label('kokugo_t',$kokugo->username) }}
+            {!! Form::radio('kokugo_t', $kokugo->id, false, ['class' => 'radioBtn']) !!}
+            @endforeach
+        </div>
+
+        <div class="form-group">
+            <p>{{ Form::label('math_t','数学講師担当者') }}</p>
+            @foreach($math as $math)
+            {{ Form::label('math_t',$math->username) }}
+            {{ Form::radio('math_t', $math->id, false,['class' => 'radioBtn']) }}
+            @endforeach
+        </div>
+
+
+            <p>{{ Form::submit('確認',['class'=>'btn']) }}</p>
+
+        {!! Form::close() !!}
     </div>
 </div>
+
 @endsection
+
+
+<!-- $table->string('username', 60)->comment('名前');
+            $table->string('username_kana', 60)->comment('フリガナ');
+            $table->dateTime('birthday')->comment('誕生日');
+            $table->dateTime('admission_date')->comment('入学日');
+            $table->integer('gender')->comment('性別');
+            $table->string('email', 255)->unique()->comment('メールアドレス');
+            $table->string('password', 255)->comment('パスワード');
+            $table->integer('role')->default(10)->nullable()->comment('権限');
+            $table->timestamp('created_at')->useCurrent()->comment('登録日時'); -->

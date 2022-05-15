@@ -13,4 +13,10 @@ class UserPersonCharge extends Model
         'math_teacher_user_id',
         'japanese_language_user_id',
     ];
+
+    //     public function user()
+    // {
+    //     return $this->belongsTo('App\Models\Users\User');
+    //     // (user::class);
+    // }
 }

@@ -13,8 +13,21 @@ class User extends Authenticatable
     protected $table = 'users';
 
     protected $fillable = [
-        'user_id',
-        'math_teacher_user_id',
-        'japanese_language_user_id',
+        // 'user_id',
+        // 'math_teacher_user_id',
+        // 'japanese_language_user_id',
+                    'username',
+                    'username_kana',
+                    'birthday',
+                    'admission_date',
+                    'gender',
+                    'email',
+                    'password',
+                    'role',
     ];
+
+    //     public function UserPersonCharges()
+    // {
+    //     return $this->hasMany('App\Models\Users\UserPersonCharge');
+    // }
 }

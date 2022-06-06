@@ -12,4 +12,10 @@ class UserScore extends Model
         'user_id',
         'score',
     ];
+
+
+        public function users()
+    {
+        return $this->hasMany('App\Models\Users\user');
+    }
 }

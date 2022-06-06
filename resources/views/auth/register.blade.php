@@ -1,7 +1,7 @@
 @extends('layouts.logout')
 
 @section('content')
-<div class="container">
+
     <div class = "title">ユーザー登録</div>
     {!! Form::open(['url' => '/confirmation']) !!}
     {{Form::token()}}
@@ -17,15 +17,13 @@
             <p>{{ Form::label('username','ユーザー名(姓、名)') }}</p>
             {!! Form::input('text', 'LastName', null, ['class' => 'form']) !!}
             <!-- 上と下のファサードは書き方が違うだけで同じ -->
-            {{ Form::text('FirstName',null,['class' => 'form
-right']) }}
+            {{ Form::text('FirstName',null,['class' => 'form right']) }}
         </div>
 
         <div class="form-group">
             <p>{{ Form::label('username_kana','ユーザー名(セイ、メイ)') }}</p>
             {!! Form::input('text', 'LastName_kana', null, ['class' => 'form']) !!}
-            {{ Form::text('FirstName_kana',null,['class' => 'form
-right']) }}
+            {{ Form::text('FirstName_kana',null,['class' => 'form right']) }}
         </div>
 
         <div class="form-group">
@@ -76,6 +74,7 @@ right']) }}
 
         <div class="form-group radio">
             <p>{{ Form::label('kokugo_t','国語講師担当者') }}</p>
+            {!! Form::radio('kokugo_t', "", true, ['class' => 'radioBtn', 'style'=>'display:none']) !!}
             @foreach($kokugo as $kokugo)
             {{ Form::label('kokugo_t',$kokugo->username) }}
             {!! Form::radio('kokugo_t', $kokugo->id, false, ['class' => 'radioBtn']) !!}
@@ -84,6 +83,7 @@ right']) }}
 
         <div class="form-group">
             <p>{{ Form::label('math_t','数学講師担当者') }}</p>
+            {{Form::hidden('math_t')}}
             @foreach($math as $math)
             {{ Form::label('math_t',$math->username) }}
             {{ Form::radio('math_t', $math->id, false,['class' => 'radioBtn']) }}
@@ -95,17 +95,5 @@ right']) }}
 
         {!! Form::close() !!}
     </div>
-</div>
 
 @endsection
-
-
-<!-- $table->string('username', 60)->comment('名前');
-            $table->string('username_kana', 60)->comment('フリガナ');
-            $table->dateTime('birthday')->comment('誕生日');
-            $table->dateTime('admission_date')->comment('入学日');
-            $table->integer('gender')->comment('性別');
-            $table->string('email', 255)->unique()->comment('メールアドレス');
-            $table->string('password', 255)->comment('パスワード');
-            $table->integer('role')->default(10)->nullable()->comment('権限');
-            $table->timestamp('created_at')->useCurrent()->comment('登録日時'); -->

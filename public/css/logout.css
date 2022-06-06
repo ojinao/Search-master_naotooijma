@@ -11,6 +11,30 @@ body {
   width: 1400px;
 }
 
+a {
+  text-decoration: none;
+}
+
+#container {
+  width: 1300px;
+  margin: 0 auto;
+}
+
+.login-container {
+  margin-top: 150px;
+}
+
+.loginBtn {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-right: 20px;
+  text-align: right;
+}
+
+.link {
+  text-align: left;
+}
+
 .title{
   font-size: xx-large;
   margin: 20px 0;
@@ -40,4 +64,12 @@ p{
 }
 .radio{
   margin: 15px 0 10px 0;
+}
+.btn{
+  color: #fff;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  height: 30px;
+  width: 100px;
+  margin-bottom: 30px;
 }

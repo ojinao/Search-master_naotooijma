@@ -26,8 +26,21 @@ class User extends Authenticatable
                     'role',
     ];
 
-    //     public function UserPersonCharges()
-    // {
-    //     return $this->hasMany('App\Models\Users\UserPersonCharge');
-    // }
+        protected $dates = [
+        'birthday',
+        'admission_date'
+    ];
+
+    public function UserPersonCharges()
+    {
+        return $this->hasMany('App\Models\Users\UserPersonCharge');
+    }
+
+    public function UserScores()
+    {
+        return $this->hasMany('App\Models\Users\UserScore');
+
+    }
+
+
 }

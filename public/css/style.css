@@ -1,1 +1,70 @@
 @charset "utf-8";
+
+body{
+  width: 1500px;
+
+}
+
+a {
+  text-decoration: none;
+}
+
+.header{
+  width: 1300px;
+  margin: 20px auto;
+  display: flex;
+  justify-content: space-between;
+}
+#container{
+  width: 1300px;
+  margin: 0 auto;
+
+}
+
+.search{
+  text-align: right;
+}
+
+.search .btn-primary{
+ width: 200px;
+}
+
+.users{
+
+  display: inline-grid;
+  width: 300px;
+  margin: 50px 64px;
+  height: 200px;
+}
+.detail{
+  margin: auto;
+}
+/* modal */
+
+.modal-header{
+  border: none;
+}
+.selection{
+  align-items: baseline;
+}
+span{
+  margin-right: 10px;
+}
+.show{
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+.modal-footer{
+  border: none;
+}
+/* ページ送りを中央寄せ */
+.pagination {
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+/* ページ送りを横並びに */
+.pagination li {
+  display: inline-block;
+}

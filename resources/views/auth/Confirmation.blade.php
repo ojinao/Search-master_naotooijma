@@ -6,11 +6,6 @@
     {!! Form::open(['url' => '/storage']) !!}
     {{Form::token()}}
 
-    @if($errors->any())
-    @foreach($errors->all() as $error)
-    {{ $error}}<br/>
-    @endforeach
-    @endif
 
     <div class = "main">
         <div class="form-group">
@@ -55,12 +50,12 @@
 
         <div class="form-group">
             <p>{{ Form::label('password','パスワード') }}</p>
-            {{ Form::password('password',['class' => 'form big','readonly']) }}
+            <input class="form big" name="password" type="password" value="{{$input['password'] }}" required>
         </div>
 
         <div class="form-group">
             <p>{{ Form::label('password','パスワード確認') }}</p>
-            {{ Form::password('password_confirmation',['class' => 'form big','readonly']) }}
+            <input class="form big" name="password_confirmation" type="password" value="{{$input['password_confirmation'] }}" required>
         </div>
 
         <div class="form-group radio">
@@ -75,27 +70,29 @@
 
         <div class="form-group radio">
             <p>{{ Form::label('kokugo_t','国語講師担当者') }}</p>
+            {{Form::hidden('kokugo_t',$input["kokugo_t"])}}
             @foreach($kokugo as $kokugo)
             {{ Form::label('kokugo_t',$kokugo->username) }}
             {!! Form::radio('kokugo_t', $kokugo->id, ($input["kokugo_t"] == $kokugo->id)? true:false, ['class' => 'radioBtn','disabled']) !!}
-            {{Form::hidden('kokugo_t',$input["kokugo_t"])}}
             @endforeach
         </div>
 
         <div class="form-group radio">
             <p>{{ Form::label('math_t','数学講師担当者') }}</p>
+
+            {{Form::hidden('math_t',$input["math_t"])}}
             @foreach($math as $math)
             {{ Form::label('math_t',$math->username) }}
             {{ Form::radio('math_t', $math->id, ($input["math_t"] == $math->id)? true:false,['class' => 'radioBtn','disabled']) }}
-            {{Form::hidden('math_t',$input["math_t"])}}
             @endforeach
+
         </div>
 
 
         <p>{{ Form::submit('保存',['class'=>'btn']) }}</p>
 
 
-        {!! Form::close() !!}
+    {!! Form::close() !!}
     </div>
 </div>
 

@@ -67,7 +67,7 @@
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                      <h5 class="modal-title" id="staticBackdropLabel"></h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -75,7 +75,7 @@
                         {{ csrf_field()}}
 
                           <div class="show selection">
-                            <div class="title" name='top'>並び替え<span>:</span></div>
+                            <div class="title" name='top'>並び替え</div><span>:</span>
                                   <select name="kinds">
                                     <option selected="selected" value></option>
                                     <option value="username">名前</option>
@@ -83,7 +83,7 @@
                                     <option value="admission_date">入学日</option>
                                     <option value="score">点数</option>
                                   </select>
-                                  <select name="order">
+                                  <select name="order" class="order">
                                     <option selected="selected" value></option>
                                     <option value="asc">昇順</option>
                                     <option value="desc">降順</option>
@@ -91,13 +91,14 @@
                           </div>
 
                           <div class="show selection">
-                            <div class="title">年齢<span>:</span></div>
+                            <div class="title">年齢</div><span>:</span>
                                   <select name="underAge">
                                     <option selected="selected" value></option>
                                     @for($i = 15; $i < 66; $i++)
                                     <option value="{{$i}}">{{$i}}</option>
                                     @endfor
                                   </select>
+                                    <div>~</div>
                                   <select name="overAge">
                                     <option selected="selected" value></option>
                                     @for($i = 15; $i < 66; $i++)
@@ -107,36 +108,43 @@
                           </div>
 
                           <div class="show selection">
-                            <div class ="title">入学日<span>:</span></div>
-                              <input type="date" class="" name="admission_date">
+                            <div class ="title">入学日</div><span>:</span>
+                              <input type="date" class="" name="u_admission_date">
+                                <div>~</div>
+                              <input type="date" class="" name="o_admission_date">
                           </div>
 
                               <div class="show">
-                                <div class="title">担当数学講師<span>:</span></div>
+                                <div class="title">担当数学講師</div><span>:</span>
+                                <div class ="teacher">
                                 @foreach($math as $math)
                                   <label for="math_t">{{$math->username}}
-                                    <input type="checkbox" name="math_t" value="{{$math->id}}">
-                                    </label>
+                                    <input type="checkbox" name="math_t" value="{{$math->id}}" class="checkbox">
+                                  </label>
                                 @endforeach
+                                </div>
                               </div>
 
                               <div class="show">
-                                <div class="title">担当国語講師<span>:</span></div>
+                                <div class="title">担当国語講師</div><span>:</span>
+                                <div class ="teacher">
                                 @foreach( $kokugo as $kokugo )
                                   <label for="kokugo_t">{{$kokugo->username}}
-                                     <input type="checkbox" name="kokugo_t" value="{{$kokugo->id}}">
+                                     <input type="checkbox" name="kokugo_t" value="{{$kokugo->id}}" class="checkbox">
                                   </label>
                                 @endforeach
+                                </div>
                               </div>
 
                               <div class="show selection">
-                                <div class="title">点数<span>:</span></div>
+                                <div class="title">点数</div><span>:</span>
                                <select name="underscore">
                                  <option selected="selected" value></option>
                                     @for($i = 0; $i < 501; $i++)
                                     <option value="{{$i}}">{{$i}}</option>
                                     @endfor
                                   </select>
+                                   <div>~</div>
                                   <select name="overscore">
                                     <option selected="selected" value></option>
                                     @for($i = 0; $i < 501; $i++)
@@ -146,15 +154,15 @@
                               </div>
 
                               <div class="show">
-                                <div class="title">権限<span>:</span></div>
+                                <div class="title">権限</div><span>:</span>
                                   <label for="">数学教師
-                                    <input type="checkbox" name="role" value="5">
+                                    <input type="checkbox" name="role" value="5" class="checkbox">
                                   </label>
                                   <label for="">国語教師
-                                    <input type="checkbox" name="role" value="0">
+                                    <input type="checkbox" name="role" value="0" class="checkbox">
                                   </label>
                                   <label for="">生徒
-                                    <input type="checkbox" name="role" value="10">
+                                    <input type="checkbox" name="role" value="10" class="checkbox">
                                   </label>
                               </div>
 

@@ -21,6 +21,7 @@ a {
 
 }
 
+
 .search{
   text-align: right;
 }
@@ -47,17 +48,34 @@ a {
 .selection{
   align-items: baseline;
 }
+.title{
+  width: 120px;
+  margin-left: 10px;
+}
 span{
-  margin-right: 10px;
+  margin-right: 20px;
 }
 .show{
   display: flex;
-  flex-wrap: wrap;
-  margin-bottom: 15px;
+  margin-bottom: 50px;
 }
+.order{
+  margin-left: 10px;
+}
+.teacher{
+  width: 300px;
+}
+.checkbox{
+  margin: 0 10px 20px 0;
+}
+
 .modal-footer{
   border: none;
 }
+.modal-footer .btn{
+  width: 110px;
+}
+
 /* ページ送りを中央寄せ */
 .pagination {
   justify-content: center;

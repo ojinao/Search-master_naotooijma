@@ -33,7 +33,7 @@
         @foreach ($users->UserPersonCharges as $UserPersonCharge)
             @if(!is_null($UserPersonCharge->math_teacher_user_id))
 
-              <div>担当数学講師：{{$UserPersonCharge->user->username}}</div>
+              <div>担当数学講師：{{$UserPersonCharge->math_teacher_user_id}}</div>
             @else
               <div>担当数学講師：不明</div>
             @endif

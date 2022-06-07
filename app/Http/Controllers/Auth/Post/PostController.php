@@ -35,7 +35,8 @@ class PostController extends Controller
         $order = $request->input('order');
         $underAge = $request->input('underAge');
         $overAge = $request->input('overAge');
-        $admission_date = $request->input('admission_date');
+        $u_admission_date = $request->input('u_admission_date');
+        $o_admission_date = $request->input('o_admission_date');
         $kokugo_t = $request->input('kokugo_t');
         $math_t = $request->input('math_t');
         $underscore = $request->input('underscore');
@@ -97,8 +98,11 @@ class PostController extends Controller
                 $query->where('birthday', '>=', $earliestBirthday);
         }
         // 入学日検索
-        if(!empty($admission_date)){
-            $query->Where('admission_date','=',$admission_date);
+        if(!empty($u_admission_date)){
+            $query->Where('admission_date','>=',$u_admission_date);
+        }
+        if(!empty($o_admission_date)){
+            $query->Where('admission_date','<=',$o_admission_date);
         }
         // 数学講師
         if(!empty($math_t)){

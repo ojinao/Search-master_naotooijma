@@ -29,8 +29,8 @@ class UserRequest extends FormRequest
 
                    'LastName' => ['required', 'string','max:10'],
                    'FirstName' => ['required', 'string','max:10'],
-                   'LastName_kana' =>['required', 'string','max:30'],
-                   'FirstName_kana' =>['required', 'string','max:30'],
+                   'LastName_kana' =>['required', 'string','max:30','regex:/^[ア-ン゛゜ァ-ォャ-ョー]+$/u'],
+                   'FirstName_kana' =>['required', 'string','max:30','regex:/^[ア-ン゛゜ァ-ォャ-ョー]+$/u'],
                     'birthday_year'=>['required'],
                     'birthday_month'=>['required'],
                     'birthday_day'=>['required'],
@@ -40,10 +40,10 @@ class UserRequest extends FormRequest
                     'admission_day'=>['required'],
                     'admission' =>['required','after_or_equal:2000-01-01','before_or_equal:today'],
                    'gender'=>'required|in:0,1|',
-                   'email' => ['required', 'string', 'email', 'max:100', 'unique:users'],
-                   'password' => ['required', 'string', 'min:8', 'max:16','confirmed'],
+                   'email' => ['required','email', 'max:100', 'unique:users'],
+                   'password' => ['required','min:8', 'max:16','confirmed'],
                    'password_confirmation' => ['required'],
-                   'role' => ['required'],
+                   'role' => ['required','in:0,5,10'],
                 //    'kokugo_t' => ['nullable'],
                 //    'math_t' => ['nullable']
 

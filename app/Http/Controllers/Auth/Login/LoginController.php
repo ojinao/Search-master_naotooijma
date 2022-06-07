@@ -17,18 +17,21 @@ class LoginController extends Controller
 
     if($request->isMethod('post')){
 
-    $data=$request->only('email','password');
-     $validatedData = $request->validate([
-        'email' =>'exists:users,email|',
+         $data=$request->only('email','password');
+         $validatedData = $request->validate([
+            'email' =>'exists:users,email|',
          ]);
+
             // ログインが成功したら、トップページへ
+
         if(Auth::attempt($data)){
-                return redirect('/top');
+                return redirect('/index');
         }
     }
         return view('auth.login');
     }
-        public function logout(){
+
+    public function logout(){
       Auth::logout();
     return redirect('/login');
     }

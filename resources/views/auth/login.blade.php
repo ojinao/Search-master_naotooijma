@@ -13,6 +13,12 @@
         @endforeach
        @endif
 
+        @if (session('error'))
+            <p class="text-danger mt-3">
+                {{ session('error') }}
+            </p>
+        @endif
+
         <div class="form-group">
             <p>{{ Form::label('e-mail','メールアドレス') }}</p>
             {{ Form::email('email',null,['class' => 'form big']) }}

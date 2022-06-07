@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller; // ←追加
 Use App\Models\Users\User;
 Use App\Models\Users\UserScore;
+use Illuminate\Support\Facades\Auth;
 
 use Carbon\Carbon;
 
@@ -15,6 +16,11 @@ class PostController extends Controller
 {
     //
     public function index(Request $request){
+        // $a=Auth::user()->role;
+         if(!(Auth::user()->role == 0 or Auth::user()->role == 5)){
+              Auth::logout();
+             return redirect('/login')->with('error', '権限が違います。');
+         };
 
         $user=User::with(['UserPersonCharges','UserScores'])->orderBy('username', 'desc')->paginate(15);
         $kokugo=User::where('role','0')->get();

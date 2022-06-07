@@ -30,8 +30,9 @@ Route::post('/storage', 'Auth\Register\RegisterController@storage');
 
 Route::get('/add', 'Auth\Register\RegisterController@added')->name('add');
 
-// login
-Route::post('/logout','Auth\Login\LoginController@logout');
 
-Route::get('/index','Auth\Post\PostController@index')->name('index');
-Route::get('/search','Auth\Post\PostController@search')->name('search');
+// login
+
+  Route::post('/logout','Auth\Login\LoginController@logout');
+  Route::get('/index','Auth\Post\PostController@index')->name('index');
+  Route::get('/search','Auth\Post\PostController@search')->name('search');

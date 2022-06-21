@@ -17,13 +17,14 @@ class UserPersonCharge extends Model
 
         public function user()
     {
-        return $this->belongsTo('App\Models\Users\User');
+        return $this->belongsToMany('App\Models\Users\User');
         // (user::class);
     }
 
-    public function kokugo(){
-        return $this->user()->where('Users.role','5')->get();
+        public function getM($user_id){
+        return $this ->where('math_teacher_user_id', $user_id)->get();
     }
+
 
 
 

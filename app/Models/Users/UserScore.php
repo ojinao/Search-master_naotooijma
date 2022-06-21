@@ -16,6 +16,6 @@ class UserScore extends Model
 
         public function users()
     {
-        return $this->hasMany('App\Models\Users\user');
+        return $this->hasOne('App\Models\Users\user');
     }
 }

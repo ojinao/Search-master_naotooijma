@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller; // ←追加
 Use App\Models\Users\User;
 Use App\Models\Users\UserScore;
+Use App\Models\Users\UserPersonCharge;
 use Illuminate\Support\Facades\Auth;
 
 use Carbon\Carbon;
@@ -15,14 +16,15 @@ use Carbon\Carbon;
 class PostController extends Controller
 {
     //
-    public function index(Request $request){
+    public function index(Request $request,UserPersonCharge $UserPersonCharge){
         // $a=Auth::user()->role;
-         if(!(Auth::user()->role == 0 or Auth::user()->role == 5)){
+        $role = Auth::user();
+         if(!($role->role == 0 or $role->role == 5)){
               Auth::logout();
              return redirect('/login')->with('error', '権限が違います。');
          };
 
-        $user=User::with(['UserPersonCharges','UserScores'])->orderBy('username', 'desc')->paginate(15);
+        $user=User::with(['mathT','kokugoT','UserScore'])->orderBy('username', 'desc')->paginate(15);
         $kokugo=User::where('role','0')->get();
         $math=User::where('role','5')->get();
 // dd(config('user.role'));
@@ -134,12 +136,15 @@ class PostController extends Controller
                 $query->on('users.id', '=', 'o_score.user_id');})
                         ->where('o_score.score','<=',$overscore);
         }
-        if(!empty($role)) {
+        if(!is_null($role)) {
             $query->where('role','=', $role);
         }
 
          $user = $query->orderBy('username', 'desc')->paginate(15);
 
+         if($user->isEmpty()){
+            return redirect('/index')->with('error', '対象のユーザーはいません');
+         }
 
         return view('post.index',compact('user','kokugo','math'));;
     }

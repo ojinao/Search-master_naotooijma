@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -31,16 +32,25 @@ class User extends Authenticatable
         'admission_date'
     ];
 
-    public function UserPersonCharges()
+    public function mathT()
     {
-        return $this->hasMany('App\Models\Users\UserPersonCharge');
+        // return $this->hasMany('App\Models\Users\UserPersonCharge');
+        return $this->belongsToMany(self::class,'user_person_charges','user_id','math_teacher_user_id')->withPivot('user_id');
+    }
+    public function kokugoT()
+    {
+        // return $this->hasMany('App\Models\Users\UserPersonCharge');
+        return $this->belongsToMany(self::class,'user_person_charges','user_id','japanese_language_user_id');
     }
 
-    public function UserScores()
+    public function UserScore()
     {
-        return $this->hasMany('App\Models\Users\UserScore');
+        return $this->hasOne('App\Models\Users\UserScore');
 
     }
 
+            public function getM($user_id){
+        return $this -> mathT()->where('math_teacher_user_id', $user_id)->get();
+    }
 
 }

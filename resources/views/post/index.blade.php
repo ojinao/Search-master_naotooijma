@@ -12,17 +12,22 @@
   </div>
 </div>
 
-  <div class ="search">
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-  詳細検索
-    </button>
-  </div>
+<div class ="search">
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    詳細検索
+  </button>
+</div>
+@if (session('error'))
+   <p class="error">
+       {{ session('error') }}
+   </p>
+@endif
 
   @foreach($user as $users)
 
-
   <div class = "users">
+
     <div class ="detail">
       <div>名前 {{$users->username}} {{config('user.gender.'.$users->gender)}} {{ \Carbon\Carbon::parse($users->birthday)->age}}歳</div>
 
@@ -30,35 +35,38 @@
 
       <div>誕生日：{{$users->birthday->format('Y年m月d日')}}</div>
 
-        @foreach ($users->UserPersonCharges as $UserPersonCharge)
-            @if(!is_null($UserPersonCharge->math_teacher_user_id))
+      @if(!$users->mathT->isEmpty() && $users->role == 10)
+          <div>担当数学講師： {{$users->mathT[0]->username}} </div>
+      @elseif($users->mathT->isEmpty() && $users->role == 10)
+          <div>担当数学講師： 不明</div>
+      @else
+          <div></div>
+      @endif
 
-              <div>担当数学講師：{{$UserPersonCharge->math_teacher_user_id}}</div>
-            @else
-              <div>担当数学講師：不明</div>
-            @endif
-            @if(!empty($UserPersonCharge->japanese_language_user_id))
+      @if(!$users->kokugoT->isEmpty() && $users->role == 10)
+          <div>担当国語講師： {{$users->kokugoT[0]->username}} </div>
+      @elseif($users->kokugoT->isEmpty() && $users->role == 10)
+          <div>担当国語講師： 不明</div>
+      @else
+        <div></div>
+      @endif
 
-              <div>担当国語講師：{{$UserPersonCharge->japanese_language_user_id}}</div>
-            @else
-              <div>担当国語講師：不明</div>
-            @endif
-        @endforeach
 
-          @foreach ($users->UserScores as $UserScore)
-            @if(!empty($UserScore->score))
-              <div>点数：{{$UserScore->score}}</div>
+
+            @if(!empty($users->UserScore))
+              <div>点数：{{$users->UserScore->score}}</div>
+            @elseif($users->role != 10)
+              <div></div>
             @else
               <div>点数:0点</div>
             @endif
-          @endforeach
 
           <div>権限：{{config('user.role.'.$users->role)}}</div>
     </div>
   </div>
   @endforeach
-           <div>{{$user->appends(request()->query())->links()}}</div>
 
+           <div>{{$user->appends(request()->query())->links()}}</div>
 
 @endsection
 

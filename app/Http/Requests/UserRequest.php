@@ -44,8 +44,8 @@ class UserRequest extends FormRequest
                    'password' => ['required','min:8', 'max:16','confirmed'],
                    'password_confirmation' => ['required'],
                    'role' => ['required','in:0,5,10'],
-                //    'kokugo_t' => ['nullable'],
-                //    'math_t' => ['nullable']
+                //    'kokugo_t' => [''],
+                //    'math_t' => ['']
 
         ];
     }

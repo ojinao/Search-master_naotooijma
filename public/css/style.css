@@ -29,6 +29,9 @@ a {
 .search .btn-primary{
  width: 200px;
 }
+.error{
+  text-align: center;
+}
 
 .users{
 
@@ -52,7 +55,7 @@ a {
   width: 120px;
   margin-left: 10px;
 }
-span{
+.show span{
   margin-right: 20px;
 }
 .show{

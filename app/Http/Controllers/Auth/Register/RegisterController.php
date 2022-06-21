@@ -28,14 +28,13 @@ class RegisterController extends Controller
 
     public function confirmation(UserRequest $request){
 
-        // $input = $request->all();
         $kokugo=User::where('role','0')->get();
         $math=User::where('role','5')->get();
         $request->session()->put('form_input',$request->input());
-        // dd($request);
+
       //validationはphp artisan make:request UserRequestで作成
          $input =$request->session()->get('form_input',array());
-        // dd($input);
+ // dd($input);
         return view('auth.confirmation',compact('kokugo','math','input'));
     }
 
@@ -73,7 +72,6 @@ class RegisterController extends Controller
                     'japanese_language_user_id' => $data['kokugo_t'],
                     'math_teacher_user_id' => $data['math_t']
                 ]);
-
                 // UserScore::create([
                 //     'user_id' => $user->id,
                 // ]);

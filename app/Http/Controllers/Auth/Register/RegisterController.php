@@ -32,7 +32,7 @@ class RegisterController extends Controller
         $math=User::where('role','5')->get();
         $request->session()->put('form_input',$request->input());
 
-      //validationはphp artisan make:request UserRequestで作成
+      //validationはphp artisan make:request UserRequestで作成 appのhttpのRequests
          $input =$request->session()->get('form_input',array());
  // dd($input);
         return view('auth.confirmation',compact('kokugo','math','input'));
